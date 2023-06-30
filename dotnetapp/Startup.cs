@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using dotnetapp.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace dotnetapp
 {
@@ -28,9 +32,21 @@ namespace dotnetapp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //string connectionString = Configuration.GetConnectionString("myconnstring");
-           // services.AddDbContext<ProductDBContext>(opt => opt.UseSqlServer(connectionString));
+            string connectionString = Configuration.GetConnectionString("myconnstring");
+            services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(connectionString));
            // services.AddScoped<IProductService, ProductService>();
+           services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme). AddJwtBearer(
+options =>{
+    options.TokenValidationParameters=new TokenValidationParameters{
+        ValidateIssuer=true,
+        ValidateAudience=true,
+        ValidateLifetime=true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer="saran.in",
+        ValidAudience="Reader",
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("THis_is_$%4675_Key_I^%$%^_hanve_Genereted"))
+    };
+});
             services.AddCors();
 
             services.AddControllers();
