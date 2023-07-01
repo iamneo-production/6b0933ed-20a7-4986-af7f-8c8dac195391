@@ -17,6 +17,8 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using dotnetapp.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using dotnetapp.Service;
+using dotnetapp.Controllers;
 
 namespace dotnetapp
 {
@@ -34,7 +36,8 @@ namespace dotnetapp
         {
             string connectionString = Configuration.GetConnectionString("myconnstring");
             services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(connectionString));
-           // services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<JobseekerController>();
+           
            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme). AddJwtBearer(
 options =>{
     options.TokenValidationParameters=new TokenValidationParameters{
@@ -42,7 +45,7 @@ options =>{
         ValidateAudience=true,
         ValidateLifetime=true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer="saran.in",
+        ValidIssuer="Issuer.in",
         ValidAudience="Reader",
         IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("THis_is_$%4675_Key_I^%$%^_hanve_Genereted"))
     };
@@ -71,6 +74,7 @@ options =>{
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
