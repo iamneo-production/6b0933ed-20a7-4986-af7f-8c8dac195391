@@ -17,11 +17,13 @@ namespace dotnetapp.Controllers
     {
         private readonly MyDbContext _context;
         private readonly JobseekerController _jobseekercontroller;
+        private readonly AdminController _admincontroller;
 
 
-        public UserController(MyDbContext context, JobseekerController jobseekercontroller){
+        public UserController(MyDbContext context, JobseekerController jobseekercontroller,AdminController admincontroller){
             _context=context;
             _jobseekercontroller=jobseekercontroller;
+            _admincontroller=admincontroller;
        
     }
     [HttpGet]
@@ -33,10 +35,10 @@ namespace dotnetapp.Controllers
 
         }
         else {
-            return Ok("yep");
+            return Ok(_admincontroller.GetAllJobs(requestModel));
         }
         }
-        catch (Exception e){
+        catch (Exception ){
             return BadRequest();
         }
 

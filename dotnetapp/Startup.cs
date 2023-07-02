@@ -37,7 +37,9 @@ namespace dotnetapp
             string connectionString = Configuration.GetConnectionString("myconnstring");
             services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(connectionString));
             services.AddScoped<JobseekerController>();
-           
+            services.AddScoped<AdminController>();
+            services.AddScoped<UserController>();
+
            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme). AddJwtBearer(
 options =>{
     options.TokenValidationParameters=new TokenValidationParameters{
