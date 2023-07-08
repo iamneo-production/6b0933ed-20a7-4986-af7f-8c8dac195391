@@ -156,16 +156,16 @@ namespace dotnetapp.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MobileNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("mobileNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserRole")
+                    b.Property<string>("userRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Email");
