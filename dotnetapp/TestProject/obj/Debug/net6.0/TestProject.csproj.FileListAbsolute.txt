@@ -18,6 +18,10 @@
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/TestProject.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/TestProject.pdb
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Castle.Core.dll
+<<<<<<< HEAD
+=======
+/home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+>>>>>>> 662c039b3c7ea92ea146fee9c1db87fd9fbaf633
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll
