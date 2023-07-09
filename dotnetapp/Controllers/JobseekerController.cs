@@ -35,12 +35,11 @@ namespace dotnetapp.Controllers
                         job => job.JobId,
                         appliedJob => appliedJob.JobId,
                         (job, appliedJob) => new { Job = job, AppliedJob = appliedJob })
-                    .Where(ja => ja.AppliedJob.JobSeekerId == 1)
+                    .Where(ja => ja.AppliedJob.JobSeekerId == UserId)
                     .Select(ja => ja.Job)
                     .ToList();
         if (!appliedJobs.Any()){
             return Ok(UserId);
-            // return NotFound(jobSeekerId);
         }
         else
         {
