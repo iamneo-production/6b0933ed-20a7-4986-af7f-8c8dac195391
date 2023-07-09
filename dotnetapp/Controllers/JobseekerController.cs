@@ -35,12 +35,12 @@ namespace dotnetapp.Controllers
                         job => job.JobId,
                         appliedJob => appliedJob.JobId,
                         (job, appliedJob) => new { Job = job, AppliedJob = appliedJob })
-                    .Where(ja => ja.AppliedJob.JobSeekerId == 1)
+                    .Where(ja => ja.AppliedJob.JobSeekerId == UserId)
                     .Select(ja => ja.Job)
                     .ToList();
         if (!appliedJobs.Any()){
-            return Ok(UserId);
-            // return NotFound(jobSeekerId);
+            
+            return NotFound(new { Msg = "No Job Found" });
         }
         else
         {
@@ -58,7 +58,7 @@ namespace dotnetapp.Controllers
         List<Job> jobs = _context.Jobs.ToList();
                 if (!jobs.Any())
                 {
-                    return Conflict(new { Msg = "No Job Found" }); 
+                    return NotFound(new { Msg = "No Job Found" }); 
                 }
                 return Ok(jobs);
         }

@@ -1,0 +1,119 @@
+<!-- <div class="container p-2 d-flex justify-content-center">
+    <div class="col-md-6">
+        <input type="text" class="form-control mb-3" placeholder="Search Jobs" [(ngModel)]="searchTerm"
+            (keyup)="filterJobs()" />
+    </div>
+</div>
+<div class="container p-2 d-flex justify-content-center">
+    <div class="card p-2 h-100">
+        <div class="card-header  mb-2 bg-primary text-light">
+            Posted Jobs
+        </div>
+        <div *ngFor="let job of filteredJobs" class="card mb-3">
+            <div class="card" ></div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group p-2">
+                        <p class="card-text"><strong>Job Description:</strong> {{ job.jobDescription }}</p>
+                    </div>
+                    <div class="form-group p-2">
+                        <p class="card-text"><strong>Job Location:</strong> {{ job.jobLocation }}</p>
+                    </div>
+                    <div class="form-group p-2">
+                        <p class="card-text"><strong>Wages per Day:</strong> {{ job.wagePerDay }}</p>
+                    </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group p-2">
+                        <p class="card-text"><strong>From Date:</strong> {{ job.fromDate | date:'dd-MM-yyyy' }}</p>
+                    </div>
+                    <div class="form-group p-2">
+                        <p class="card-text"><strong>To Date:</strong> {{ job.toDate | date:'dd-MM-yyyy' }}</p>
+                    </div>
+                    <div class="form-group p-2">
+                        <p class="card-text"><strong>Mobile Number:</strong> {{ job.mobileNumber }}</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col d-flex justify-content-between">
+                        <button class="btn btn-sm mt-2"
+                            [ngClass]="{'btn-primary': isJobAvailable(job), 'btn-danger': isJobExpired(job)}"
+                            [disabled]="true">
+                            {{ isJobExpired(job) ? 'Expired' : 'Available' }}
+                    </button>
+                    <button class="btn btn-success btn-sm mt-2" routerLink="/jobseeker/applyJob"
+                    [ngClass]="{'btn-danger': isJobAlreadyApplied(job.jobId)}"
+                    [disabled]="isJobAlreadyApplied(job.jobId)" (click)="AssignJobId(job.jobId)">
+                    {{ isJobAlreadyApplied(job.jobId) ? 'Already Applied' : 'Apply now' }}
+                </button>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container full-page-container" >
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-md-6 col-lg-7 col-xl-6" >
+      <div class="container p-2 d-flex justify-content-center " >
+        <div class="col-md-6">
+          <input type="text" class="form-control mb-3" placeholder="Search Jobs" [(ngModel)]="searchTerm"
+            (keyup)="filterJobs()" style="background-color: rgb(182, 212, 245);" />
+        </div>
+      </div>
+      <div class="container p-2 d-flex justify-content-center " >
+        <div class="scroll-container ">
+        <div class="card p-2 w-100" style="outline:none;border: none;">
+          <div *ngFor="let job of filteredJobs" class="card mb-3 w-100">
+            <div class="card-body  ">
+              <div class="row">
+                <div class="col-md-6 ">
+                  <div class="form-group p-2">
+                    <p class="card-text"><strong>Job Description:</strong> {{ job.jobDescription }}</p>
+                  </div>
+                  <div class="form-group p-2">
+                    <p class="card-text"><strong>Job Location:</strong> {{ job.jobLocation }}</p>
+                  </div>
+                  <div class="form-group p-2">
+                    <p class="card-text"><strong>Wages per Day:</strong> {{ job.wagePerDay }}</p>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group p-2">
+                    <p class="card-text"><strong>From Date:</strong> {{ job.fromDate | date:'dd-MM-yyyy' }}</p>
+                  </div>
+                  <div class="form-group p-2">
+                    <p class="card-text"><strong>To Date:</strong> {{ job.toDate | date:'dd-MM-yyyy' }}</p>
+                  </div>
+                  <div class="form-group p-2">
+                    <p class="card-text"><strong>Mobile Number:</strong> {{ job.mobileNumber }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col d-flex justify-content-between">
+                <div class="col p-2">
+                  <button class="btn btn-sm mt-2"
+                    [ngClass]="{'btn-primary': isJobAvailable(job), 'btn-danger': isJobExpired(job)}" [disabled]="true">
+                    {{ isJobExpired(job) ? 'Expired' : 'Available' }}
+                  </button>
+                </div>
+                <div class="col p-2 d-flex justify-content-end">
+                    <button class="btn btn-success btn-sm mt-2" routerLink="/jobseeker/applyJob"
+                    [ngClass]="{'btn-danger': isJobAlreadyApplied(job.jobId)}"
+                    [disabled]="isJobAlreadyApplied(job.jobId)" (click)="AssignJobId(job.jobId)">
+                    {{ isJobAlreadyApplied(job.jobId) ? 'Already Applied' : 'Apply now' }}
+                </button>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-md-6 col-lg-3 col-xl-4 offset-xl-1">
+      </div>
+      </div>
+      </div>

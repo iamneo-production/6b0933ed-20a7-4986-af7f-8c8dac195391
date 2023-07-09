@@ -52,7 +52,15 @@ options =>{
         IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("THis_is_$%4675_Key_I^%$%^_hanve_Genereted"))
     };
 });
-            services.AddCors();
+             services.AddCors(options =>
+    {
+        options.AddPolicy("AllowOrigin", builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+    });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -72,7 +80,7 @@ options =>{
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowOrigin");
             app.UseRouting();
 
             app.UseAuthorization();
