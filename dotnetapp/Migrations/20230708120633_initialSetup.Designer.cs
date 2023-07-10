@@ -12,8 +12,8 @@ using dotnetapp.Data;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230630084644_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20230708120633_initialSetup")]
+    partial class initialSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,16 +158,16 @@ namespace dotnetapp.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MobileNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("mobileNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserRole")
+                    b.Property<string>("userRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Email");
