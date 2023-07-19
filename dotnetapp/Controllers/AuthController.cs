@@ -15,7 +15,6 @@ using Microsoft.VisualBasic;
 namespace dotnetapp.Controllers
 {
     [ApiController]
-    [Route("user")]
     public class AuthController : ControllerBase
     {
         private readonly MyDbContext _context;
@@ -27,8 +26,8 @@ namespace dotnetapp.Controllers
 
         }
         [HttpPost]
-        [Route("signup")]
-        public async Task<IActionResult> SignUp([FromBody] SignUp data)
+        [Route("user/signup")]
+        public async Task<IActionResult> saveUser([FromBody] SignUp data)
         {
             if (ModelState.IsValid)
             {  
@@ -48,6 +47,31 @@ namespace dotnetapp.Controllers
                     _context.Users.Add(user);
                
             }
+            if (data.userRole=="Jobseeker"){
+                var existseeker=await _context.JobSeekers.FirstOrDefaultAsync(js=>js.Email==data.Email);
+                if (existseeker!=null){
+                    return Conflict(new{msg="Jobseeker Already Exists"});
+                }
+                var jobseeker = new JobSeeker
+                    {
+                        JobSeekerName = data.username,
+                        MobileNumber = data.mobileNumber,
+                        Email = data.Email,
+                        Password = data.Password,
+                        UserRole = data.userRole
+                    };
+                    _context.JobSeekers.Add(jobseeker);   
+            }
+            await _context.SaveChangesAsync();
+            return Created("",new{Msg="Successfully Registered"});
+                    
+            }
+            return BadRequest(new { Msg = "Error Occured" });
+        }
+        [HttpPost]
+        [Route("admin/signup")]
+        public async Task<IActionResult> saveAdmin([FromBody] SignUp data){
+            try{
             if (data.userRole=="Admin"){
                 var existAdmin=await _context.Admins.FirstOrDefaultAsync(a=>a.Email==data.Email);
                 if (existAdmin!=null){
@@ -62,44 +86,45 @@ namespace dotnetapp.Controllers
                         UserRole = data.userRole
                     };
                 _context.Admins.Add(admin);
-                
-            }
-            if (data.userRole=="Jobseeker"){
-                var existseeker=await _context.JobSeekers.FirstOrDefaultAsync(js=>js.Email==data.Email);
-                if (existseeker!=null){
-                    return Conflict(new{msg="Jobseeker Already Exists"});
-                }
-                var jobseeker = new JobSeeker
-                    {
-                        JobSeekerName = data.username,
-                        MobileNumber = data.mobileNumber,
-                        Email = data.Email,
-                        Password = data.Password,
-                        UserRole = data.userRole
-                    };
-                    _context.JobSeekers.Add(jobseeker);
-                    
-            }
-            await _context.SaveChangesAsync();
-            return Created("",new{Msg="Successfully Registered"});
-                    
-            }
-            return BadRequest(new { Msg = "Error Occured" });
-        }
-        [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login([FromBody] Login data)
-        {
-            bool isAuthenticated=false;
-            if (data.UserRole=="User" && data.Email!="admin@gmail.com"){
-                isAuthenticated = await IsUserPresent(data);
-            }
-            else if (data.UserRole=="Jobseeker"  && data.Email!="admin@gmail.com" ){
-                 isAuthenticated = await IsUserPresent(data);
+                await _context.SaveChangesAsync();
+                return Created("",new{Msg="Successfully Registered"});   
             }
             else{
-                isAuthenticated = await IsAdminPresent(data);
-            } 
+                 return BadRequest(new { Msg = "Error Occured" });
+            }
+            }
+            catch(Exception){
+                    return BadRequest(new { Msg = "Error Occured" });
+            }
+        }
+        [HttpPost]
+        [Route("admin/login")]
+        public async Task<IActionResult> isAdminPresent([FromBody] Login data){
+            bool isAuthenticated=false;
+            isAuthenticated = await IsAdminPresent(data);
+             if (!isAuthenticated)
+            {
+                return Unauthorized("Invalid email, password, or user role.");
+            }
+            
+            // Generate JWT token
+            string token = await GenerateTokenAsync(data);
+            return Ok(new { Token = token });
+
+        }
+
+        [HttpPost]
+        [Route("user/login")]
+        public async Task<IActionResult> isUserPresent([FromBody] Login data)
+        {
+            bool isAuthenticated=false;
+            if (data.UserRole=="User"){
+                isAuthenticated = await IsUserPresent(data);
+            }
+            else {
+                 isAuthenticated = await IsUserPresent(data);
+            }
+           
             if (!isAuthenticated)
             {
                 return Unauthorized("Invalid email, password, or user role.");
