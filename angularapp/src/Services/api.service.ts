@@ -16,7 +16,7 @@ import { Paymentmodel } from 'src/Models/paymentmodel.class';
 })
 export class ApiService {
   
-  private readonly apiUrl:string = 'https://8080-fbcdbbefcafbefccadccfbaecebaebffdaedcbb.project.examly.io';
+  private readonly apiUrl:string = 'https://8080-ccbacbcafbefccadccfbaecebaebffdaedcbb.project.examly.io';
   
   constructor(private http: HttpClient) {}
   userSignup(user: Signupmodel): Observable<Signupmodel> {
