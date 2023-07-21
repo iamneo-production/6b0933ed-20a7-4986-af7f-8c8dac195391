@@ -20,6 +20,11 @@ import { CustomerdashboardComponent } from './Components/Customer/customerdashbo
 import { CustomereditjobComponent } from './Components/Customer/customereditjob/customereditjob.component';
 import { CustomernavigationComponent } from './Components/Customer/customernavigation/customernavigation.component';
 import { CustomerviewappliedjobsComponent } from './Components/Customer/customerviewappliedjobs/customerviewappliedjobs.component';
+import { AdmincandidatesComponent } from './Components/admin/admincandidates/admincandidates.component';
+import { AdmineditcandidatesComponent } from './Components/admin/admineditcandidates/admineditcandidates.component';
+import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
+import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
+import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +37,16 @@ import { CustomerviewappliedjobsComponent } from './Components/Customer/customer
     CustomereditjobComponent,
     CustomernavigationComponent,
     CustomerviewappliedjobsComponent,
+    AdmincandidatesComponent,
+    AdmineditcandidatesComponent,
+    AdmineditopeningComponent,
+    AdminnavigationComponent,
+    AdminopeningsComponent,
     
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,

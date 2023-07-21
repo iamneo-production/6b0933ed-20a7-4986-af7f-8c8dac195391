@@ -9,6 +9,11 @@ import { CustomerdashboardComponent } from './Components/Customer/customerdashbo
 import { CustomeraddjobComponent } from './Components/Customer/customeraddjob/customeraddjob.component';
 import { CustomerviewappliedjobsComponent } from './Components/Customer/customerviewappliedjobs/customerviewappliedjobs.component';
 import { CustomereditjobComponent } from './Components/Customer/customereditjob/customereditjob.component';
+import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
+import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
+import { AdmincandidatesComponent } from './Components/admin/admincandidates/admincandidates.component';
+import { AdmineditcandidatesComponent } from './Components/admin/admineditcandidates/admineditcandidates.component';
+import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
 
 const routes: Routes = [
   {
@@ -17,6 +22,18 @@ const routes: Routes = [
     children: [
       { path: 'user/signup', component: SignupComponent },
       { path: 'user/login', component: LoginComponent }
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminnavigationComponent,
+    // canActivate: [AuthGuard],
+    data: { roles: ['admin'] }, 
+    children: [
+      { path: 'getAllJobs', component: AdminopeningsComponent },
+      { path: 'profile', component: AdmincandidatesComponent },
+      { path: 'editProfile/:id', component: AdmineditcandidatesComponent },
+      { path: 'editJob/:id', component: AdmineditopeningComponent }
     ]
   },
   {
