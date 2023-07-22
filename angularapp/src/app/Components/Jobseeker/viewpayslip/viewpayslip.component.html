@@ -1,0 +1,37 @@
+<app-loader *ngIf="isLoading" class="overlay"></app-loader>
+<div *ngIf="!isLoading">
+    <div class="payment-review p-2" >
+    <div class="row">
+    <h3 style="text-align: center; margin-bottom: 20px;">Payment Receipt</h3>
+<div  *ngIf=" paymentDetails"  class="row" style="margin-bottom: 20px;">
+    <p><strong>Carpenter Name:</strong> {{  paymentDetails.jobSeekerName }}</p>
+    <p><strong>Mobile no:</strong> {{  paymentDetails.mobileNumber}}</p>
+    <p><strong>Job Description:</strong> {{  paymentDetails.jobDescription }}</p>
+</div>
+    <div  *ngIf=" paymentDetails" class="col" >
+        <p><strong>Start Date:</strong> {{  paymentDetails.fromDate | date:'dd-MM-yyyy' }}</p>
+        <p><strong>End Date:</strong> {{  paymentDetails.toDate | date:'dd-MM-yyyy' }}</p>     
+        <p><strong>Wage per Day:</strong> {{  paymentDetails.wagePerDay}}</p>    
+    </div>
+    <div  *ngIf=" paymentDetails" class="col">
+        <p><strong>Gross Salary:</strong> &#x20B9; {{ paymentDetails.grossSalary | number: '1.2-2' }}</p>
+<p><strong>Deductions:</strong> &#x20B9; {{ paymentDetails.deductions | number: '1.2-2' }}</p>
+<p><strong>Allowances:</strong> &#x20B9; {{ paymentDetails.allowances | number: '1.2-2' }}</p>
+<div class="total mb-1" style="border-bottom: 2px solid black; border-top: 2px solid black;">
+  <p style="margin-top: 8px;"><strong>Net Salary:</strong> &#x20B9; {{ paymentDetails.netSalary | number: '1.2-2' }} /-</p>
+</div>
+    </div>
+    <div *ngIf="! paymentDetails" class="no-payment">
+        <p>No payment done.</p>
+    </div>
+    <div class="buttons  d-flex justify-content-center " >
+        <div class="col d-flex justify-content-end ">
+            <button class="btn btn-secondary btn-sm" (click)="closePaymentslip()">Close</button>
+        </div>
+      </div>
+  </div>
+    </div>
+    </div>
+    
+
+
