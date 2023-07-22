@@ -47,29 +47,6 @@ namespace dotnetapp.Controllers
     {
         return BadRequest(new { Msg = "Error Occurred" });
     }
-        try{
-        int UserId = requestModel.UserId;
-        List<Job> appliedJobs =  _context.Jobs
-                    .Join(_context.JobJobSeekers,
-                        job => job.JobId,
-                        appliedJob => appliedJob.JobId,
-                        (job, appliedJob) => new { Job = job, AppliedJob = appliedJob })
-                    .Where(ja => ja.AppliedJob.JobSeekerId == UserId)
-                    .Where(ja => ja.AppliedJob.JobSeekerId == UserId)
-                    .Select(ja => ja.Job)
-                    .ToList();
-        if (!appliedJobs.Any()){
-            return Ok(UserId);
-            
-        }
-        else
-        {
-            return Ok(appliedJobs);
-        }
-        }
-        catch (Exception){
-            return BadRequest(new { Msg = "Error Occured" });
-        }
     }
     [HttpGet]
     [Route("getJobs")]

@@ -25,6 +25,10 @@ import { AdmineditcandidatesComponent } from './Components/admin/admineditcandid
 import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
 import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
 import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
+import { PaymentReviewComponent } from './Components/Customer/payment-review/payment-review.component';
+import { LoaderComponent } from './Components/loader/loader.component';
+import { DecimalPipe } from '@angular/common';
+import { ChatTemplateComponent } from './Components/chat-template/chat-template.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,9 @@ import { AdminopeningsComponent } from './Components/admin/adminopenings/adminop
     AdmineditopeningComponent,
     AdminnavigationComponent,
     AdminopeningsComponent,
+    PaymentReviewComponent,
+    LoaderComponent,
+    ChatTemplateComponent,
     
   ],
   imports: [
@@ -50,6 +57,7 @@ import { AdminopeningsComponent } from './Components/admin/adminopenings/adminop
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+
   
   ],
   providers: [ApiService,NotificationService,AuthService,AuthGuard,JobserviceService,IdserviceService,JobjobseekerService],
