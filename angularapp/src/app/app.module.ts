@@ -29,6 +29,11 @@ import { PaymentReviewComponent } from './Components/Customer/payment-review/pay
 import { LoaderComponent } from './Components/loader/loader.component';
 import { DecimalPipe } from '@angular/common';
 import { ChatTemplateComponent } from './Components/chat-template/chat-template.component';
+import { JobseekerappliedjobComponent } from './Components/Jobseeker/jobseekerappliedjob/jobseekerappliedjob.component';
+import { JobseekerapplyjobComponent } from './Components/Jobseeker/jobseekerapplyjob/jobseekerapplyjob.component';
+import { JobseekerdashboardComponent } from './Components/Jobseeker/jobseekerdashboard/jobseekerdashboard.component';
+import { JobseekernavigationComponent } from './Components/Jobseeker/jobseekernavigation/jobseekernavigation.component';
+import { ViewpayslipComponent } from './Components/Jobseeker/viewpayslip/viewpayslip.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,11 @@ import { ChatTemplateComponent } from './Components/chat-template/chat-template.
     PaymentReviewComponent,
     LoaderComponent,
     ChatTemplateComponent,
+    JobseekerappliedjobComponent,
+    JobseekerapplyjobComponent,
+    JobseekerdashboardComponent,
+    JobseekernavigationComponent,
+    ViewpayslipComponent,
     
   ],
   imports: [
