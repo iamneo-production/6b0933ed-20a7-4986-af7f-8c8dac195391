@@ -13,7 +13,11 @@ import { JobseekernavigationComponent } from './Components/Jobseeker/jobseekerna
 import { JobseekerdashboardComponent } from './Components/Jobseeker/jobseekerdashboard/jobseekerdashboard.component';
 import { JobseekerapplyjobComponent } from './Components/Jobseeker/jobseekerapplyjob/jobseekerapplyjob.component';
 import { JobseekerappliedjobComponent } from './Components/Jobseeker/jobseekerappliedjob/jobseekerappliedjob.component';
-import { JobseekereditjobComponent } from './Components/Jobseeker/jobseekereditjob/jobseekereditjob.component';
+import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
+import { AdmincandidatesComponent } from './Components/admin/admincandidates/admincandidates.component';
+import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
+import { AdmineditcandidatesComponent } from './Components/admin/admineditcandidates/admineditcandidates.component';
+import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
 
 const routes: Routes = [
   {
@@ -27,30 +31,42 @@ const routes: Routes = [
   {
     path: 'customer',
     component: CustomernavigationComponent,
-    // canActivate: [AuthGuard],
-    data: { roles: ['customer'] }, // Specify the allowed roles for the route
+    canActivate: [AuthGuard],
+    data: { roles: ['customer'] }, 
     children: [
       { path: 'dashboard', component: CustomerdashboardComponent },
       { path: 'addJob', component: CustomeraddjobComponent },
       { path: 'viewAppliedCandidates', component: CustomerviewappliedjobsComponent },
-      {path:'editJob',component:CustomereditjobComponent}
+      {path:'editJob/:id',component:CustomereditjobComponent}
     ]
   },
   {
     path: 'jobseeker',
     component: JobseekernavigationComponent,
-    // canActivate: [AuthGuard],
-    data: { roles: ['jobseeker'] }, // Specify the allowed roles for the route
+    canActivate: [AuthGuard],
+    data: { roles: ['jobseeker'] },
     children: [
       { path: 'dashboard', component: JobseekerdashboardComponent },
       { path: 'applyJob', component: JobseekerapplyjobComponent },
-      { path: 'appliedJob', component: JobseekerappliedjobComponent },
-      {path:'editjob',component:JobseekereditjobComponent}
+      { path: 'appliedJob', component: JobseekerappliedjobComponent }
+      
     ]
   },
-   // Add an unauthorized route for users with insufficient privileges
+  {
+    path: 'admin',
+    component: AdminnavigationComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] }, 
+    children: [
+      { path: 'getAllJobs', component: AdminopeningsComponent },
+      { path: 'profile', component: AdmincandidatesComponent },
+      { path: 'editProfile/:id', component: AdmineditcandidatesComponent },
+      { path: 'editJob/:id', component: AdmineditopeningComponent }
+    ]
+  },
+  
    { path: 'unauthorized', component: HomeComponent },
-   // Add a wildcard route for handling undefined routes
+
    { path: 'login', redirectTo: '/user/login' }
 ];
 

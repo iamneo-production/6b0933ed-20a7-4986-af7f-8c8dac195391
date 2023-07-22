@@ -38,7 +38,34 @@ export class SignupComponent implements OnInit {
       this.data.mobileNumber = this.form.value.mobileNumber;
       this.data.userRole = this.form.value.userRole;
       console.log(this.data);
-      this.apiservice.Signup(this.data).subscribe(
+      if (this.data.userRole=="Admin"){
+        this.apiservice.adminSignup(this.data).subscribe(
+          (response: any) => {
+            this.isLoading=false;
+            console.log(response); 
+            this.notificationService.showSuccess('Successfully Registered!');
+            this.form.reset();
+            this.router.navigate(['/user/login']);
+          },
+          (error:any) => {
+            this.isLoading=false;
+            console.log(error.error)
+            if (error.status === 409) {
+              this.notificationService.showError('Email already exists.');
+              this.form.reset();
+              this.router.navigate(['/user/signup']);
+            }
+            else {
+              this.notificationService.showError('An error occurred during registration.');
+              this.form.reset();
+              this.router.navigate(['/user/signup']);
+            }
+          }
+        );
+
+      }
+      else{
+      this.apiservice.userSignup(this.data).subscribe(
         (response: any) => {
           this.isLoading=false;
           console.log(response); 
@@ -61,6 +88,7 @@ export class SignupComponent implements OnInit {
           }
         }
       );
+      }
     } else {
       this.notificationService.showError('Please fix the errors in the form.');
     }
@@ -69,7 +97,6 @@ export class SignupComponent implements OnInit {
   startloading(){
     if (this.isLoading){
     setTimeout(() => {
-      // this.isLoading = false;
     });
   }
   }

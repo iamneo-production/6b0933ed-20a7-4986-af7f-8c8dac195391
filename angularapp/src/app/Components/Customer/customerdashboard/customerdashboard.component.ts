@@ -11,6 +11,7 @@ import { JobserviceService } from 'src/Services/jobservice.service';
   styleUrls: ['./customerdashboard.component.css']
 })
 export class CustomerdashboardComponent implements OnInit {
+  nojobfound=true;
   jobs: Jobmodel[] = [];
   filteredJobs: Jobmodel[]=[];
   searchTerm: string='';
@@ -18,12 +19,13 @@ export class CustomerdashboardComponent implements OnInit {
   constructor(private apiservice:ApiService, private jobservice:JobserviceService,private authservice:AuthService,private router:Router){
     this.filteredJobs = this.jobs;
   }
-  
+
   isJobExpired(job: any): boolean {
     const currentDate = new Date();
     const toDate = new Date(job.toDate);
     return toDate < currentDate;
   }
+  
   isJobAvailable(job: any): boolean {
     const currentDate = new Date();
     const toDate = new Date(job.toDate);
@@ -54,8 +56,10 @@ export class CustomerdashboardComponent implements OnInit {
         console.log(values);
         this.jobs=values;
         this.filteredJobs = values;
+        this.nojobfound=false;
       },
       (error: any) => {
+        this.nojobfound=true;
         console.log(error);
       }
     );

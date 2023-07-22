@@ -1,63 +1,3 @@
-<!-- <div class="container p-2 d-flex justify-content-center">
-    <div class="col-md-6">
-    </div>
-</div>
-<div class="container p-2 d-flex justify-content-center">
-    <div class="card p-2 h-100">
-        <div class="card-header  mb-2 bg-primary text-light">
-            Posted Jobs
-        </div>
-        <div *ngFor="let job of filteredJobs" class="card mb-3">
-            <div class="card"></div>
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group p-2">
-                            <p class="card-text"><strong>Job Description:</strong> {{ job.jobDescription }}</p>
-                        </div>
-                        <div class="form-group p-2">
-                            <p class="card-text"><strong>Job Location:</strong> {{ job.jobLocation }}</p>
-                        </div>
-                        <div class="form-group p-2">
-                            <p class="card-text"><strong>Wages per Day:</strong> {{ job.wagePerDay }}</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 ">
-                        <div class="form-group p-2">
-                            <p class="card-text"><strong>From Date:</strong> {{ job.fromDate | date:'dd-MM-yyyy' }}</p>
-                        </div>
-                        <div class="form-group p-2">
-                            <p class="card-text"><strong>To Date:</strong> {{ job.toDate | date:'dd-MM-yyyy' }}</p>
-                        </div>
-                        <div class="form-group p-2">
-                            <p class="card-text"><strong>Mobile Number:</strong> {{ job.mobileNumber }}</p>
-                        </div>
-                    </div>
-                    </div>
-
-                        <div class="col d-flex justify-content-between">
-                            <div class="col p-2">
-                                <button class="btn btn-sm mt-2"
-                                    [ngClass]="{'btn-success': isJobAvailable(job), 'btn-danger': isJobExpired(job)}"
-                                    [disabled]="true">
-                                    {{ isJobExpired(job) ? 'Completed' : 'Applied' }}
-                                </button>
-                            </div>
-                            <div class="col p-2 d-flex justify-content-between">
-                                <div class="dd ">
-                                <button class="btn btn-sm mt-2  btn-primary" routerLink="/jobseeker/editjob">Edit</button>
-                            </div>
-                            <div class="dd">
-                                <button class="btn btn-sm mt-2  btn-danger " >Delete</button>
-                            </div>
-                            </div>
-
-                        </div>
-                    </div>
-                
-            </div>
-        </div>
-    </div> -->
     <div class="container full-page-container" >
         <div class="row d-flex align-items-center justify-content-center h-100">
           <div class="col-md-6 col-lg-8 col-xl-7" >
@@ -78,34 +18,37 @@
               <div class="row">
                 <div class="col-md-6 ">
                   <div class="form-group p-2">
-                    <p class="card-text"><strong>Job Description:</strong> {{ job.jobDescription }}</p>
+                    <p class="card-text"><strong>Job Description:</strong> {{ job.job.jobDescription }}</p>
                   </div>
                   <div class="form-group p-2">
-                    <p class="card-text"><strong>Job Location:</strong> {{ job.jobLocation }}</p>
+                    <p class="card-text"><strong>Job Location:</strong> {{ job.job.jobLocation }}</p>
                   </div>
                   <div class="form-group p-2">
-                    <p class="card-text"><strong>Wages per Day:</strong> {{ job.wagePerDay }}</p>
+                    <p class="card-text"><strong>Wages per Day:</strong> {{ job.job.wagePerDay }}</p>
                   </div>
                 </div>
                 <div class="col-md-6 ">
                   <div class="form-group p-2">
-                    <p class="card-text"><strong>From Date:</strong> {{ job.fromDate | date:'dd-MM-yyyy' }}</p>
+                    <p class="card-text"><strong>From Date:</strong> {{ job.job.fromDate | date:'dd-MM-yyyy' }}</p>
                   </div>
                   <div class="form-group p-2">
-                    <p class="card-text"><strong>To Date:</strong> {{ job.toDate | date:'dd-MM-yyyy' }}</p>
+                    <p class="card-text"><strong>To Date:</strong> {{ job.job.toDate | date:'dd-MM-yyyy' }}</p>
                   </div>
                   <div class="form-group p-2">
-                    <p class="card-text"><strong>Mobile Number:</strong> {{ job.mobileNumber }}</p>
+                    <p class="card-text"><strong>Mobile Number:</strong> {{ job.job.mobileNumber }}</p>
                   </div>
                 </div>
               </div>
               <div class="col d-flex justify-content-between">
+                <div class="col p-2 d-flex justify-content-start">
+                  <button class="btn btn-sm btn-primary" *ngIf="job.status=='Completed'" (click)="viewPaymentslip(job)">View PaySlip</button>
+              </div>
                 <div class="col p-2 d-flex justify-content-end">
                   <div class="dd" style=" margin-right: 20px; ">
-                    <button class="btn btn-sm   btn-primary"  (click)="GetJobDetails(job)">Status</button>
+                    <button class="btn btn-sm   btn-primary" (click)="myFunction(job.jobId)" [class.btn-success]="job.status === 'Applied'" [class.btn-danger]="job.status === 'Completed'" [disabled]="job.status=== 'Completed'" >{{job.status}}</button> 
                   </div>
                   <div class="dd">
-                    <button class="btn  btn-sm  btn-primary" (click)="openChat(js)">Chat</button>
+                    <button class="btn  btn-sm  btn-primary"(click)="ChatBox(job,job.job.jobId)">Chat</button>
                   </div>
                 </div>
               </div>
@@ -116,10 +59,12 @@
       </div>
       </div>
       <div class="col-md-6 col-lg-3 col-xl-4 offset-xl-1">
-        <!-- <div style="height: 100%; width: 100%; overflow: hidden;">
-          <img src="https://media.istockphoto.com/id/1382100060/vector/stand-up-meeting-with-group-of-business-people.jpg?s=170667a&w=0&k=20&c=gnIA_M_Mki5WVjNqrn4K9WjYMoQ4cIzwa0b7T0-4Kxo="
-            class="img-fluid" alt="Phone image" style="height: 100%; width: 100%; object-fit: cover;">
-        </div> -->
+        <div class="chat-container"><app-chat-template *ngIf="showChat" [candidate]="selectedUser" (close)="closeChat()" ></app-chat-template></div>
+         </div>
       </div>
+      <div class="container">
+        <div class="overlay" *ngIf="showPaymentslip">
+          <app-viewpayslip [Details]="selectedJob" (cancel)="closePaymentslip()"></app-viewpayslip>
+        </div>
       </div>
       </div>

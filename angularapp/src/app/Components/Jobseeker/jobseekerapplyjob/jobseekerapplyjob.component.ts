@@ -47,7 +47,7 @@ export class JobseekerapplyjobComponent implements OnInit {
           this.router.navigate(['/jobseeker/appliedJob']);
         },
         (error)=>{
-          console.log(error.error);
+          console.log(error);
         }
       );
 

@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
       this.logindata.Email = form.value.email;
       this.logindata.Password = form.value.password;
       this.logindata.UserRole = form.value.userRole;
-      this.apiservice.Login(this.logindata).subscribe(
+      if (this.logindata.Email!="admin@gmail.com"&& this.logindata.Password!="Admin@123"){
+      this.apiservice.userLogin(this.logindata).subscribe(
         (response: any) => {
           this.isLoading=false;
           console.log(response);
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
           if ((this.authservice.getUserRole()=="Admin")){
             this.router.navigate(['/admin']);
           }
-          else if ((this.authservice.getUserRole()=="User")){
+          if ((this.authservice.getUserRole()=="User")){
             this.router.navigate(['/customer']);
           }
           else{
@@ -69,6 +70,34 @@ export class LoginComponent implements OnInit {
           }
         }
       );
+      }
+      else{
+        this.apiservice.adminLogin(this.logindata).subscribe(
+          (response: any) => {
+            this.isLoading=false;
+            console.log(response);
+            this.form.reset();
+            this.authservice.login(response.token);
+            if ((this.authservice.getUserRole()=="Admin")){
+              this.router.navigate(['/admin']);
+            }
+          },
+          (error: any) => {
+            this.isLoading=false;
+            console.log(error.error);
+            if (error.status === 401) {
+              console.log('Error 401');
+              this.notificationservice.showLoginError('Login Failed');
+              this.form.reset();
+              this.router.navigate(['/user/login']);
+            } else {
+              this.notificationservice.showLoginError('An error occurred during Login.');
+              this.form.reset();
+              this.router.navigate(['/user/login']);
+            }
+          }
+        );
+      }
     } else {
       this.notificationservice.showLoginError('Please fix the errors in the form.');
     }

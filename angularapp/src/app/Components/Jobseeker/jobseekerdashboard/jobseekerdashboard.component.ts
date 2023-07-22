@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Jobjobseekermodel } from 'src/Models/jobjobseekermodel.class';
 import { Jobmodel } from 'src/Models/jobmodel.class';
 import { ApiService } from 'src/Services/api.service';
 import { AuthService } from 'src/Services/auth.service';
@@ -14,6 +15,7 @@ export class JobseekerdashboardComponent implements OnInit {
   jobid!: number;
   filteredJobs: Jobmodel[] = [];
   searchTerm: string = '';
+  appliedjobs:Jobjobseekermodel[]=[];
 
   constructor(
     private apiservice: ApiService,
@@ -38,6 +40,18 @@ export class JobseekerdashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getJobs();
     this.filterJobs();
+    this.getAppliedJobs();
+  }
+  getAppliedJobs() {
+    this.apiservice.appliedJob(this.authservice.getUserId(),this.authservice.getUserRole()).subscribe(
+      (response:Jobjobseekermodel[])=>{
+        this.appliedjobs=response;
+        console.log(response);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
 
   AssignJobId(id: number): void {
@@ -52,6 +66,7 @@ export class JobseekerdashboardComponent implements OnInit {
         this.jobs = values;
         this.filteredJobs = values;
         console.log(this.jobs);
+        console.log(values);
       },
       (error)=>{
         console.log(error.error);
@@ -76,18 +91,14 @@ export class JobseekerdashboardComponent implements OnInit {
     }
   }
 
-  isJobAlreadyApplied(jobid: number):any {
-      // this.apiservice.CheckAlreadyApplied(jobid,this.authservice.getUserId(),this.authservice.getUserRole()).subscribe(
-      //   (response: boolean) => {
-      //     console.log(response);
-      //     return response;
-
-      //   },
-      //   (error) => {
-      //     console.error(error);
-      return false;
-        }
-      // );
+ isJobAlreadyApplied(jobId:number): boolean{
+  for (let i = 0; i < this.appliedjobs.length; i++) {
+    if (this.appliedjobs[i].jobId==jobId){
+      return true;
     }
+  }
+  return false;
   
-
+ }
+  
+  }

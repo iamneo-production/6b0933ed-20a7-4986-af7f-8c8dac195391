@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -19,14 +18,22 @@ import { CustomerviewappliedjobsComponent } from './Components/Customer/customer
 import { CustomereditjobComponent } from './Components/Customer/customereditjob/customereditjob.component';
 import { AuthGuard } from 'src/Services/authguard.service';
 import { JobserviceService } from 'src/Services/jobservice.service';
+import { JobjobseekerService } from 'src/Services/jobjobseeker.service';
 import { IdserviceService } from 'src/Services/idservice.service';
 import { JobseekernavigationComponent } from './Components/Jobseeker/jobseekernavigation/jobseekernavigation.component';
-import { JobseekereditjobComponent } from './Components/Jobseeker/jobseekereditjob/jobseekereditjob.component';
 import { JobseekerdashboardComponent } from './Components/Jobseeker/jobseekerdashboard/jobseekerdashboard.component';
 import { JobseekerappliedjobComponent } from './Components/Jobseeker/jobseekerappliedjob/jobseekerappliedjob.component';
 import { JobseekerapplyjobComponent } from './Components/Jobseeker/jobseekerapplyjob/jobseekerapplyjob.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderComponent } from './Components/loader/loader.component';
+import { ChatTemplateComponent } from './Components/chat-template/chat-template.component';
+import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
+import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
+import { AdmincandidatesComponent } from './Components/admin/admincandidates/admincandidates.component';
+import { AdmineditcandidatesComponent } from './Components/admin/admineditcandidates/admineditcandidates.component';
+import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
+import { PaymentReviewComponent } from './Components/Customer/payment-review/payment-review.component';
+import { ViewpayslipComponent } from './Components/Jobseeker/viewpayslip/viewpayslip.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +47,18 @@ import { LoaderComponent } from './Components/loader/loader.component';
     CustomerviewappliedjobsComponent,
     CustomereditjobComponent,
     JobseekernavigationComponent,
-    JobseekereditjobComponent,
     JobseekerdashboardComponent,
     JobseekerappliedjobComponent,
     JobseekerapplyjobComponent,
-    LoaderComponent
+    LoaderComponent,
+    ChatTemplateComponent,
+    AdminnavigationComponent,
+    AdminopeningsComponent,
+    AdmincandidatesComponent,
+    AdmineditcandidatesComponent,
+    AdmineditopeningComponent,
+    PaymentReviewComponent,
+    ViewpayslipComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +68,7 @@ import { LoaderComponent } from './Components/loader/loader.component';
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiService,NotificationService,AuthService,AuthGuard,JobserviceService,IdserviceService],
+  providers: [ApiService,NotificationService,AuthService,AuthGuard,JobserviceService,IdserviceService,JobjobseekerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

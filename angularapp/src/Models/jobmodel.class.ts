@@ -1,3 +1,5 @@
+import { Jobjobseekermodel } from "./jobjobseekermodel.class";
+
 export class Jobmodel {
     jobId!: number;
     jobDescription!: string;
@@ -8,5 +10,5 @@ export class Jobmodel {
     mobileNumber!: string;
     userId!: number;
     user: any; 
-    jobJobSeekers!: any[];
+    jobJobSeekers!: Jobjobseekermodel[];
   }

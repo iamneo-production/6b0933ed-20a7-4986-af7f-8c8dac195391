@@ -1,5 +1,5 @@
-   <div class="container full-page-container" >
-    <div class="row d-flex align-items-center justify-content-center h-100">
+   <div class="container-full-page-container" >
+    <div id="parentContainer" class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-md-6 col-lg-8 col-xl-7" >
   <div class="container p-2 d-flex justify-content-center " >
     <div class="col-md-6">
@@ -13,36 +13,39 @@
     <div class="scroll-container ">
     <div class="card p-2 w-100" style="outline:none;border: none;">
     
-      <div  *ngFor="let js of jobseekers"  class="card mb-3 w-100">
+      <div  *ngFor="let js of jobs"  class="card mb-3 w-100">
         <div class="card-body  ">
           <div class="row">
             <div class="col-md-6 ">
               <div class="form-group p-2">
-                <p class="card-text"><strong>Name: </strong>{{js.jobSeekerName}}</p>
+                <p class="card-text"><strong>Name: </strong>{{js.jobSeeker.jobSeekerName}}</p>
               </div>
               <div class="form-group p-2">
-                <p class="card-text"><strong>Address: </strong>{{js.address}}</p>
+                <p class="card-text"><strong>Address: </strong>{{js.jobSeeker.address}}</p>
               </div>
               <div class="form-group p-2">
-                <p class="card-text"><strong>Mobile Number: </strong>{{js.mobileNumber}}</p>
+                <p class="card-text"><strong>Mobile Number: </strong>{{js.jobSeeker.mobileNumber}}</p>
               </div>
             </div>
             <div class="col-md-6 ">
               <div class="form-group p-2">
-                <p class="card-text"><strong>Email: </strong>{{js.email}}</p>
+                <p class="card-text"><strong>Email: </strong>{{js.jobSeeker.email}}</p>
               </div>
               <div class="form-group p-2">
-                <p class="card-text"><strong>Years of Experience: </strong>{{js.experience}}</p>
+                <p class="card-text"><strong>Years of Experience: </strong>{{js.jobSeeker.experience}}</p>
               </div>
             </div>
           </div>
           <div class="col d-flex justify-content-between">
+            <div class="col p-2 d-flex justify-content-start">
+                <button class="btn btn-sm btn-primary" [disabled]="js.status==='Applied'" (click)="openPaymentReview(js)">Make Payment</button>
+            </div>
             <div class="col p-2 d-flex justify-content-end">
               <div class="dd" style=" margin-right: 20px; ">
-                <button class="btn btn-sm   btn-primary"  (click)="GetJobDetails(job)">Status</button>
+                <button class="btn btn-sm " [class.btn-success]="js.status === 'Applied'" [class.btn-danger]="js.status === 'Completed'" [disabled]="true">{{js.status}}</button>
               </div>
               <div class="dd">
-                <button class="btn  btn-sm  btn-primary" (click)="openChat(js)">Chat</button>
+                <button class="btn  btn-sm  btn-primary" (click)="ChatBox(js,js.job.jobId)">Chat</button>
               </div>
             </div>
           </div>
@@ -53,10 +56,13 @@
   </div>
   </div>
   <div class="col-md-6 col-lg-3 col-xl-4 offset-xl-1">
-    <!-- <div style="height: 100%; width: 100%; overflow: hidden;">
-      <img src="https://media.istockphoto.com/id/1382100060/vector/stand-up-meeting-with-group-of-business-people.jpg?s=170667a&w=0&k=20&c=gnIA_M_Mki5WVjNqrn4K9WjYMoQ4cIzwa0b7T0-4Kxo="
-        class="img-fluid" alt="Phone image" style="height: 100%; width: 100%; object-fit: cover;">
-    </div> -->
+    <div class="chat-container"><app-chat-template *ngIf="showChat" [candidate]="selectedCandidate" (close)="closeChat()" ></app-chat-template></div>
+   
   </div>
+</div>
+<div class="container">
+  <div class="overlay" *ngIf="showPaymentReview">
+    <app-payment-review [Details]="selectedJob" (cancel)="cancelPayment()"></app-payment-review>
   </div>
+</div>
   </div>
