@@ -1,5 +1,5 @@
-using dotnetapp.Data;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +14,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using dotnetapp.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using dotnetapp.Service;
+using dotnetapp.Controllers;
 
 namespace dotnetapp
 {
@@ -31,8 +36,31 @@ namespace dotnetapp
         {
             string connectionString = Configuration.GetConnectionString("myconnstring");
             services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(connectionString));
-           // services.AddScoped<IProductService, ProductService>();
-            services.AddCors();
+            services.AddScoped<JobseekerController>();
+            services.AddScoped<AdminController>();
+            services.AddScoped<UserController>();
+
+           services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme). AddJwtBearer(
+options =>{
+    options.TokenValidationParameters=new TokenValidationParameters{
+        ValidateIssuer=true,
+        ValidateAudience=true,
+        ValidateLifetime=true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer="Issuer.in",
+        ValidAudience="Reader",
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("THis_is_$%4675_Key_I^%$%^_hanve_Genereted"))
+    };
+});
+             services.AddCors(options =>
+    {
+        options.AddPolicy("AllowOrigin", builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+    });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -52,10 +80,11 @@ namespace dotnetapp
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowOrigin");
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

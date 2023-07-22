@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+=======
+>>>>>>> 662c039b3c7ea92ea146fee9c1db87fd9fbaf633
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/CoverletSourceRootsMapping
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/dotnetapp.deps.json
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/dotnetapp.runtimeconfig.json

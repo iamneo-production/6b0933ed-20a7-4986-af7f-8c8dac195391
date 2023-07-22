@@ -1,0 +1,20 @@
+<div class="chat-card">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        Chat Room
+        <button class="btn btn-sm" style="color:white;" (click)="closeChat()">Close</button>
+      </div>
+      <div #chatBody class="card-body chat-messages">
+        <div *ngFor="let message of messages" class="chat-message">
+          <div class="message-content" [ngClass]="{'text-right': message.sender === UserRole, 'text-left': message.sender !== UserRole}">
+            <p class="m-0" >{{ message.message }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-primary chat-input p-2">
+        <input [(ngModel)]="newMessage" class="form-control"style="border: none; outline: none; box-shadow:none;" placeholder="Type your message..." />
+        <button class="btn btn-sm " style="color:white;border: none; outline: none; box-shadow:none;"(click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  
