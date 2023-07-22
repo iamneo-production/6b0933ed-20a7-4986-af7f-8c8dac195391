@@ -1,5 +1,5 @@
-using dotnetapp.Data;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,11 +15,10 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using dotnetapp.Data;
-using dotnetapp.Models;
-using dotnetapp.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using dotnetapp.Service;
+using dotnetapp.Controllers;
 
 namespace dotnetapp
 {
@@ -30,7 +29,7 @@ namespace dotnetapp
             Configuration = configuration;
         }
 
-          public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -85,6 +84,7 @@ options =>{
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

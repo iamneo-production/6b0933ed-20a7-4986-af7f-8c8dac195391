@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode';
+//import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -61,3 +61,7 @@ export class AuthService {
     }
   }
 }
+function jwtDecode(token: string): any {
+  throw new Error('Function not implemented.');
+}
+
