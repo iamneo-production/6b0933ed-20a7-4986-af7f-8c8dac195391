@@ -24,4 +24,3 @@ export const validationRules = {
     ])],
     userRole: ['', Validators.required]
   };
-  
