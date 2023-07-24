@@ -11,6 +11,7 @@ import { Jobjobseekermodel } from 'src/Models/jobjobseekermodel.class';
 import { Paymentmodel } from 'src/Models/paymentmodel.class';
 
 
+
 @Injectable({
   providedIn: 'root'
 })

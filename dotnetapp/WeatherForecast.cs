@@ -1,7 +1,6 @@
 using System;
 namespace dotnetapp;
 
-
 public class WeatherForecast
 {
     public DateTime Date { get; set; }

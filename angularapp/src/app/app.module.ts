@@ -34,6 +34,10 @@ import { AdmineditcandidatesComponent } from './Components/admin/admineditcandid
 import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
 import { PaymentReviewComponent } from './Components/Customer/payment-review/payment-review.component';
 import { ViewpayslipComponent } from './Components/Jobseeker/viewpayslip/viewpayslip.component';
+import { CarpenterhiringComponent } from './Components/home/carpenterhiring/carpenterhiring.component';
+import { CustomerhomeComponent } from './Components/Customer/customernavigation/customerhome/customerhome.component';
+import { AdminhomeComponent } from './Components/admin/adminnavigation/adminhome/adminhome.component';
+import { JobseekerhomeComponent } from './Components/Jobseeker/jobseekernavigation/jobseekerhome/jobseekerhome.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,11 @@ import { ViewpayslipComponent } from './Components/Jobseeker/viewpayslip/viewpay
     AdmineditcandidatesComponent,
     AdmineditopeningComponent,
     PaymentReviewComponent,
-    ViewpayslipComponent
+    ViewpayslipComponent,
+    CarpenterhiringComponent,
+    CustomerhomeComponent,
+    AdminhomeComponent,
+    JobseekerhomeComponent
   ],
   imports: [
     BrowserModule,

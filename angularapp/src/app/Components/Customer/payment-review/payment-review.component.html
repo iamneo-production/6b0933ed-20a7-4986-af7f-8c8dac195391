@@ -14,12 +14,13 @@
         <p><strong>Wage per Day:</strong> {{ paymentDetails.wagePerDay}}</p>    
     </div>
     <div class="col">
-        <p><strong>Gross Salary:</strong> &#x20B9; {{ paymentDetails.grossSalary.toFixed(2) }}</p>
-        <p><strong>Deductions:</strong> &#x20B9; {{ paymentDetails.deductions.toFixed(2) }}</p>
-        <p><strong>Allowances:</strong> &#x20B9; {{ paymentDetails.allowances.toFixed(2) }}</p>
-        <div class="total mb-1" style=" border-bottom: 2px solid black; border-top: 2px solid black ;">
-          <p style="margin-top: 8px;"><strong>Net Salary:</strong> &#x20B9; {{ paymentDetails.netSalary.toFixed(2) }} /-</p>
-        </div>   
+        <p><strong>Gross Salary:</strong> &#x20B9; {{ paymentDetails.grossSalary | number: '1.2-2' }}</p>
+<p><strong>Deductions:</strong> &#x20B9; {{ paymentDetails.deductions | number: '1.2-2' }}</p>
+<p><strong>Allowances:</strong> &#x20B9; {{ paymentDetails.allowances | number: '1.2-2' }}</p>
+<div class="total mb-1" style="border-bottom: 2px solid black; border-top: 2px solid black;">
+  <p style="margin-top: 8px;"><strong>Net Salary:</strong> &#x20B9; {{ paymentDetails.netSalary | number: '1.2-2' }} /-</p>
+</div>
+ 
     </div>
     <div class="buttons  d-flex justify-content-center " >
         <div class="col d-flex justify-content-start ">

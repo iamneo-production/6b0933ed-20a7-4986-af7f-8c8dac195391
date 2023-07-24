@@ -18,12 +18,17 @@ import { AdmincandidatesComponent } from './Components/admin/admincandidates/adm
 import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
 import { AdmineditcandidatesComponent } from './Components/admin/admineditcandidates/admineditcandidates.component';
 import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
+import { CarpenterhiringComponent } from './Components/home/carpenterhiring/carpenterhiring.component';
+import { CustomerhomeComponent } from './Components/Customer/customernavigation/customerhome/customerhome.component';
+import { JobseekerhomeComponent } from './Components/Jobseeker/jobseekernavigation/jobseekerhome/jobseekerhome.component';
+import { AdminhomeComponent } from './Components/admin/adminnavigation/adminhome/adminhome.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
+      {path:'',component:CarpenterhiringComponent},
       { path: 'user/signup', component: SignupComponent },
       { path: 'user/login', component: LoginComponent }
     ]
@@ -34,6 +39,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['customer'] }, 
     children: [
+      {path:'',component:CustomerhomeComponent},
       { path: 'dashboard', component: CustomerdashboardComponent },
       { path: 'addJob', component: CustomeraddjobComponent },
       { path: 'viewAppliedCandidates', component: CustomerviewappliedjobsComponent },
@@ -46,6 +52,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['jobseeker'] },
     children: [
+      {path:'',component:JobseekerhomeComponent},
       { path: 'dashboard', component: JobseekerdashboardComponent },
       { path: 'applyJob', component: JobseekerapplyjobComponent },
       { path: 'appliedJob', component: JobseekerappliedjobComponent }
@@ -58,6 +65,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['admin'] }, 
     children: [
+      {path:'',component:AdminhomeComponent},
       { path: 'getAllJobs', component: AdminopeningsComponent },
       { path: 'profile', component: AdmincandidatesComponent },
       { path: 'editProfile/:id', component: AdmineditcandidatesComponent },
