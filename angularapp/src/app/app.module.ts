@@ -11,29 +11,33 @@ import { ApiService } from 'src/Services/api.service';
 import { NotificationService } from 'src/Services/notification.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/Services/auth.service';
+import { CustomernavigationComponent } from './Components/Customer/customernavigation/customernavigation.component';
+import { CustomerdashboardComponent } from './Components/Customer/customerdashboard/customerdashboard.component';
+import { CustomeraddjobComponent } from './Components/Customer/customeraddjob/customeraddjob.component';
+import { CustomerviewappliedjobsComponent } from './Components/Customer/customerviewappliedjobs/customerviewappliedjobs.component';
+import { CustomereditjobComponent } from './Components/Customer/customereditjob/customereditjob.component';
 import { AuthGuard } from 'src/Services/authguard.service';
 import { JobserviceService } from 'src/Services/jobservice.service';
-import { IdserviceService } from 'src/Services/idservice.service';
 import { JobjobseekerService } from 'src/Services/jobjobseeker.service';
-import { CustomeraddjobComponent } from './Components/Customer/customeraddjob/customeraddjob.component';
-import { CustomerdashboardComponent } from './Components/Customer/customerdashboard/customerdashboard.component';
-import { CustomereditjobComponent } from './Components/Customer/customereditjob/customereditjob.component';
-import { CustomernavigationComponent } from './Components/Customer/customernavigation/customernavigation.component';
-import { CustomerviewappliedjobsComponent } from './Components/Customer/customerviewappliedjobs/customerviewappliedjobs.component';
+import { IdserviceService } from 'src/Services/idservice.service';
+import { JobseekernavigationComponent } from './Components/Jobseeker/jobseekernavigation/jobseekernavigation.component';
+import { JobseekerdashboardComponent } from './Components/Jobseeker/jobseekerdashboard/jobseekerdashboard.component';
+import { JobseekerappliedjobComponent } from './Components/Jobseeker/jobseekerappliedjob/jobseekerappliedjob.component';
+import { JobseekerapplyjobComponent } from './Components/Jobseeker/jobseekerapplyjob/jobseekerapplyjob.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderComponent } from './Components/loader/loader.component';
+import { ChatTemplateComponent } from './Components/chat-template/chat-template.component';
+import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
+import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
 import { AdmincandidatesComponent } from './Components/admin/admincandidates/admincandidates.component';
 import { AdmineditcandidatesComponent } from './Components/admin/admineditcandidates/admineditcandidates.component';
 import { AdmineditopeningComponent } from './Components/admin/admineditopening/admineditopening.component';
-import { AdminnavigationComponent } from './Components/admin/adminnavigation/adminnavigation.component';
-import { AdminopeningsComponent } from './Components/admin/adminopenings/adminopenings.component';
 import { PaymentReviewComponent } from './Components/Customer/payment-review/payment-review.component';
-import { LoaderComponent } from './Components/loader/loader.component';
-import { DecimalPipe } from '@angular/common';
-import { ChatTemplateComponent } from './Components/chat-template/chat-template.component';
-import { JobseekerappliedjobComponent } from './Components/Jobseeker/jobseekerappliedjob/jobseekerappliedjob.component';
-import { JobseekerapplyjobComponent } from './Components/Jobseeker/jobseekerapplyjob/jobseekerapplyjob.component';
-import { JobseekerdashboardComponent } from './Components/Jobseeker/jobseekerdashboard/jobseekerdashboard.component';
-import { JobseekernavigationComponent } from './Components/Jobseeker/jobseekernavigation/jobseekernavigation.component';
 import { ViewpayslipComponent } from './Components/Jobseeker/viewpayslip/viewpayslip.component';
+import { CarpenterhiringComponent } from './Components/home/carpenterhiring/carpenterhiring.component';
+import { CustomerhomeComponent } from './Components/Customer/customernavigation/customerhome/customerhome.component';
+import { AdminhomeComponent } from './Components/admin/adminnavigation/adminhome/adminhome.component';
+import { JobseekerhomeComponent } from './Components/Jobseeker/jobseekernavigation/jobseekerhome/jobseekerhome.component';
 
 @NgModule({
   declarations: [
@@ -41,34 +45,36 @@ import { ViewpayslipComponent } from './Components/Jobseeker/viewpayslip/viewpay
     HomeComponent,
     SignupComponent,
     LoginComponent,
-    CustomeraddjobComponent,
-    CustomerdashboardComponent,
-    CustomereditjobComponent,
     CustomernavigationComponent,
+    CustomerdashboardComponent,
+    CustomeraddjobComponent,
     CustomerviewappliedjobsComponent,
+    CustomereditjobComponent,
+    JobseekernavigationComponent,
+    JobseekerdashboardComponent,
+    JobseekerappliedjobComponent,
+    JobseekerapplyjobComponent,
+    LoaderComponent,
+    ChatTemplateComponent,
+    AdminnavigationComponent,
+    AdminopeningsComponent,
     AdmincandidatesComponent,
     AdmineditcandidatesComponent,
     AdmineditopeningComponent,
-    AdminnavigationComponent,
-    AdminopeningsComponent,
     PaymentReviewComponent,
-    LoaderComponent,
-    ChatTemplateComponent,
-    JobseekerappliedjobComponent,
-    JobseekerapplyjobComponent,
-    JobseekerdashboardComponent,
-    JobseekernavigationComponent,
     ViewpayslipComponent,
-    
+    CarpenterhiringComponent,
+    CustomerhomeComponent,
+    AdminhomeComponent,
+    JobseekerhomeComponent
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-
-  
+    BrowserAnimationsModule
   ],
   providers: [ApiService,NotificationService,AuthService,AuthGuard,JobserviceService,IdserviceService,JobjobseekerService],
   bootstrap: [AppComponent]

@@ -61,7 +61,5 @@ export class AuthService {
     }
   }
 }
-function jwtDecode(token: string): any {
-  throw new Error('Function not implemented.');
-}
+
 

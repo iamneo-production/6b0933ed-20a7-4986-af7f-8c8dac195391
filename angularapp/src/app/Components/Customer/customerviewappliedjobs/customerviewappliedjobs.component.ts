@@ -15,7 +15,7 @@ export class CustomerviewappliedjobsComponent implements OnInit {
   selectedJob: any; 
   form: FormGroup;
   jobs: Jobjobseekermodel[] = [];
-  jobjobs:Jobjobseekermodel[]=[];
+  // jobjobs:Jobjobseekermodel[]=[];
   selectedCandidate: Jobjobseekermodel | null = null;
   showChat: boolean = false;
   messages: any[] = [];
@@ -79,6 +79,37 @@ export class CustomerviewappliedjobsComponent implements OnInit {
     this.showChat = false;
     this.selectedCandidate = null;
   }
+  addRating(rating :string){
+    this.apiservice.addRating(Number(rating),this.authservice.getUserId(),this.authservice.getUserRole()).subscribe(
+      (Response:any)=>{
+        this.getProfiles();
+        console.log(Response);
+      },
+      (error:any)=>{
+        console.log(error);
+      }
+    )
+  }
+  assignjob(js:Jobjobseekermodel):void {
+    let text = "Do you like to assign job to "+js.jobSeeker.jobSeekerName;
+    if (confirm(text) == true) {
+      this.ChangeStatus(js.jobId);
+    }
+    document.getElementById("demo").innerHTML = text;
+  }
+  ChangeStatus(jobId:number){
+    const jobjobs1=this.jobs.find(job => job.jobId === jobId);
+    var jjs=new Jobjobseekermodel();
+    jjs.jobId=jobjobs1.jobId;
+    jjs.status="Selected";
+    jjs.jobSeeker=jobjobs1.jobSeeker;
+    jjs.job=jobjobs1.job;
+    this.apiservice.ChangeStatus(jjs,this.authservice.getUserId(),this.authservice.getUserRole()).subscribe(
+      (response:any)=>{
+      this.getProfiles();
+      }
+    );
+}
 
 }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { NotificationService } from 'src/Services/notification.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { NotificationService } from 'src/Services/notification.service';
 })
 export class HomeComponent implements OnInit {
   notifications: string[] = [];
-  constructor(public notificationService: NotificationService) {}
+  constructor(public notificationService: NotificationService,private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.notificationService.notification$.subscribe(message => {
@@ -17,8 +19,8 @@ export class HomeComponent implements OnInit {
         this.closeNotification(message);
       }, 3000);
     });
-  }
 
+  }
   closeNotification(notification: string): void {
     this.notifications = this.notifications.filter(n => n !== notification);
   }

@@ -1,3 +1,5 @@
+import { DecimalPipe } from "@angular/common";
+
 export class Jobseekermodel{
     jobSeekerId!:string;
     userRole!:string;
@@ -6,4 +8,7 @@ export class Jobseekermodel{
     address!:string;
     experience!:string;
     mobileNumber!:string;
+    averageRating!:DecimalPipe;
+    totalRatings!:number;
+
 }

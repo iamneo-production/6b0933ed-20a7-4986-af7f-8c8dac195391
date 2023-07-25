@@ -49,7 +49,7 @@ export class JobseekerappliedjobComponent implements OnInit {
     jjs.job=jobjobs1.job;
     this.apiservice.ChangeStatus(jjs,this.authservice.getUserId(),this.authservice.getUserRole()).subscribe(
       (response:any)=>{
-        this.reloadCurrentRoute();
+       this.AppliedJobs();
       }
     );
 }

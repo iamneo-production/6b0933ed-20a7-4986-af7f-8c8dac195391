@@ -11,6 +11,7 @@ import { Jobjobseekermodel } from 'src/Models/jobjobseekermodel.class';
 import { Paymentmodel } from 'src/Models/paymentmodel.class';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -108,5 +109,9 @@ makePayment(pay:Paymentmodel):Observable<any>{
 viewpayslip(id:number,userId:number,userRole:string):Observable<Paymentmodel>{
   const url=`${this.apiUrl}/admin/viewpayslip${id}?userRole=${userRole}&UserId=${userId}`;
   return this.http.get<Paymentmodel>(url);
+}
+addRating(rating:number,userId:number,userRole:string):Observable<any>{
+  const url=`${this.apiUrl}/jobseeker/ratejobseeker${rating}?userRole=${userRole}&UserId=${userId}`;
+  return this.http.post<any>(url,null);
 }
 }

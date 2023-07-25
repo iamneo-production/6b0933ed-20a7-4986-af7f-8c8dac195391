@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Jobseekermodel } from 'src/Models/jobseekermodel.class';
 import { validationRules } from '../../auth/authsignup';
+import { JobseekerdashboardComponent } from '../../Jobseeker/jobseekerdashboard/jobseekerdashboard.component';
 import { ApiService } from 'src/Services/api.service';
 import { IdserviceService } from 'src/Services/idservice.service';
 import { AuthService } from 'src/Services/auth.service';
@@ -20,7 +21,7 @@ export class AdmineditcandidatesComponent implements OnInit {
   jobseeker:Jobseekermodel=new Jobseekermodel;
   job:Jobjobseekermodel=new Jobjobseekermodel;
   validationMessages = validationRules;
-
+  dash!: JobseekerdashboardComponent;
   userId!: number;
   constructor(private formBuilder:FormBuilder,
     private apiservice:ApiService,
