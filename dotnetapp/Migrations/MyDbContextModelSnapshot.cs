@@ -50,6 +50,43 @@ namespace dotnetapp.Migrations
                     b.ToTable("Admins");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("dotnetapp.Models.ChatMessage", b =>
+                {
+                    b.Property<int>("ChatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChatId"), 1L, 1);
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Recipient")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecipientId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ChatId");
+
+                    b.ToTable("ChatMessages");
+                });
+
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             modelBuilder.Entity("dotnetapp.Models.Job", b =>
                 {
                     b.Property<int>("JobId")
@@ -94,6 +131,12 @@ namespace dotnetapp.Migrations
                     b.Property<int>("JobSeekerId")
                         .HasColumnType("int");
 
+<<<<<<< HEAD
+=======
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
                     b.HasKey("JobId", "JobSeekerId");
 
                     b.HasIndex("JobSeekerId");
@@ -151,11 +194,73 @@ namespace dotnetapp.Migrations
                     b.ToTable("Logins");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("dotnetapp.Models.SalarySlip", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
+
+                    b.Property<decimal>("Allowances")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Deductions")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("GrossSalary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("JobDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("JobLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("JobSeekerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("NetSalary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WagePerDay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkingDays")
+                        .HasColumnType("int");
+
+                    b.HasKey("PaymentId");
+
+                    b.ToTable("SalarySlips");
+                });
+
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             modelBuilder.Entity("dotnetapp.Models.SignUp", b =>
                 {
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
 
+<<<<<<< HEAD
                     b.Property<string>("MobileNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -166,6 +271,18 @@ namespace dotnetapp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserRole")
+=======
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("username")
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Email");

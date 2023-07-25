@@ -15,9 +15,15 @@ namespace dotnetapp.Models
         public string Address { get; set; }
         public string Experience { get; set; }
         public string MobileNumber { get; set; }
+<<<<<<< HEAD
 
         //Navigation Property: Job Applied by the Job Seeker
         public ICollection<JobJobSeeker> JobJobSeekers { get; set; }
+=======
+        
+        //Navigation Property: Job Applied by the Job Seeker
+        public ICollection<JobJobSeeker> JobJobSeekers { get; set; } = new List<JobJobSeeker>();
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
         
     }
 }

@@ -15,7 +15,12 @@ namespace dotnetapp.Data
         public DbSet<JobJobSeeker> JobJobSeekers { set; get; }
         public DbSet<Login> Logins { get; set; }
         public DbSet<SignUp> SignUps { get; set; }
+<<<<<<< HEAD
         // public DbSet<ChatMessage> ChatMessages{get; set;}
+=======
+        public DbSet<ChatMessage> ChatMessages{get; set;}
+        public DbSet<SalarySlip> SalarySlips {get;set;}
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,6 +65,26 @@ namespace dotnetapp.Data
             modelBuilder.Entity<Job>().ToTable("Jobs");
             modelBuilder.Entity<JobSeeker>().ToTable("JobSeekers");
             modelBuilder.Entity<JobJobSeeker>().ToTable("JobJobSeeker");
+<<<<<<< HEAD
+=======
+
+            //Configure SalarySlip 
+             modelBuilder.Entity<SalarySlip>()
+                .Property(s => s.GrossSalary)
+                .HasColumnType("decimal(18, 2)"); // Adjust the precision and scale as per your requirements
+
+            modelBuilder.Entity<SalarySlip>()
+                .Property(s => s.NetSalary)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<SalarySlip>()
+                .Property(s => s.Allowances)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<SalarySlip>()
+                .Property(s => s.Deductions)
+                .HasColumnType("decimal(18, 2)");
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
         }
 
     }

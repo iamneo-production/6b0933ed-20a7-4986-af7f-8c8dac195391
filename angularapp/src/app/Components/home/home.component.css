@@ -1,0 +1,6 @@
+.container {
+    left: 40%;
+    position: fixed;
+    z-index: 9999; 
+    display: flex;
+  }

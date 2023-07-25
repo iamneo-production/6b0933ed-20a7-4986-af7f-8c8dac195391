@@ -15,7 +15,10 @@ using Microsoft.VisualBasic;
 namespace dotnetapp.Controllers
 {
     [ApiController]
+<<<<<<< HEAD
     [Route("user")]
+=======
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
     public class AuthController : ControllerBase
     {
         private readonly MyDbContext _context;
@@ -27,11 +30,19 @@ namespace dotnetapp.Controllers
 
         }
         [HttpPost]
+<<<<<<< HEAD
         [Route("signup")]
         public async Task<IActionResult> SignUp([FromBody] SignUp data)
         {
             if (ModelState.IsValid)
             {   
+=======
+        [Route("user/signup")]
+        public async Task<IActionResult> saveUser([FromBody] SignUp data)
+        {
+            if (ModelState.IsValid)
+            {  
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             if (data.userRole=="User"){
                 var existuser=await _context.Users.FirstOrDefaultAsync(u=> u.Email==data.Email);
                 if (existuser!=null){
@@ -48,6 +59,7 @@ namespace dotnetapp.Controllers
                     _context.Users.Add(user);
                
             }
+<<<<<<< HEAD
             if (data.userRole=="Admin"){
                 var existAdmin=await _context.Admins.FirstOrDefaultAsync(a=>a.Email==data.Email);
                 if (existAdmin!=null){
@@ -64,6 +76,8 @@ namespace dotnetapp.Controllers
                 _context.Admins.Add(admin);
                 
             }
+=======
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             if (data.userRole=="Jobseeker"){
                 var existseeker=await _context.JobSeekers.FirstOrDefaultAsync(js=>js.Email==data.Email);
                 if (existseeker!=null){
@@ -77,13 +91,18 @@ namespace dotnetapp.Controllers
                         Password = data.Password,
                         UserRole = data.userRole
                     };
+<<<<<<< HEAD
                     _context.JobSeekers.Add(jobseeker);
                     
+=======
+                    _context.JobSeekers.Add(jobseeker);   
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             }
             await _context.SaveChangesAsync();
             return Created("",new{Msg="Successfully Registered"});
                     
             }
+<<<<<<< HEAD
             return BadRequest(); 
         }
         [HttpPost]
@@ -97,6 +116,67 @@ namespace dotnetapp.Controllers
             else{
                 isAuthenticated = await IsAdminPresent(data);
             } 
+=======
+            return BadRequest(new { Msg = "Error Occured" });
+        }
+        [HttpPost]
+        [Route("admin/signup")]
+        public async Task<IActionResult> saveAdmin([FromBody] SignUp data){
+            try{
+            if (data.userRole=="Admin"){
+                var existAdmin=await _context.Admins.FirstOrDefaultAsync(a=>a.Email==data.Email);
+                if (existAdmin!=null){
+                    return Conflict(new{msg="Admin Already Exists"});
+                }
+                 var admin = new Admin
+                    {
+                        AdminName = data.username,
+                        MobileNumber = data.mobileNumber,
+                        Email = data.Email,
+                        Password = data.Password,
+                        UserRole = data.userRole
+                    };
+                _context.Admins.Add(admin);
+                await _context.SaveChangesAsync();
+                return Created("",new{Msg="Successfully Registered"});   
+            }
+            else{
+                 return BadRequest(new { Msg = "Error Occured" });
+            }
+            }
+            catch(Exception){
+                    return BadRequest(new { Msg = "Error Occured" });
+            }
+        }
+        [HttpPost]
+        [Route("admin/login")]
+        public async Task<IActionResult> isAdminPresent([FromBody] Login data){
+            bool isAuthenticated=false;
+            isAuthenticated = await IsAdminPresent(data);
+             if (!isAuthenticated)
+            {
+                return Unauthorized("Invalid email, password, or user role.");
+            }
+            
+            // Generate JWT token
+            string token = await GenerateTokenAsync(data);
+            return Ok(new { Token = token });
+
+        }
+
+        [HttpPost]
+        [Route("user/login")]
+        public async Task<IActionResult> isUserPresent([FromBody] Login data)
+        {
+            bool isAuthenticated=false;
+            if (data.UserRole=="User"){
+                isAuthenticated = await IsUserPresent(data);
+            }
+            else {
+                 isAuthenticated = await IsUserPresent(data);
+            }
+           
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             if (!isAuthenticated)
             {
                 return Unauthorized("Invalid email, password, or user role.");
@@ -125,7 +205,11 @@ namespace dotnetapp.Controllers
         }
         private async Task<bool> IsAdminPresent(Login data){
             var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == data.Email);
+<<<<<<< HEAD
             if (admin!=null && VerifyPassword(data.Password,admin.Password)&& data.UserRole==admin.UserRole){
+=======
+            if (admin!=null && VerifyPassword(data.Password,admin.Password)){
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
                 return true;
             }
             else{
@@ -147,12 +231,17 @@ namespace dotnetapp.Controllers
         {
             var securitykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("THis_is_$%4675_Key_I^%$%^_hanve_Genereted"));
             var credentials = new SigningCredentials(securitykey, SecurityAlgorithms.HmacSha256Signature);
+<<<<<<< HEAD
             var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == data.Email&& a.UserRole==data.UserRole);
+=======
+            var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == data.Email);
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == data.Email&& u.UserRole==data.UserRole);
             var jobseeker = await _context.JobSeekers.FirstOrDefaultAsync(js => js.Email == data.Email&& js.UserRole==data.UserRole);
             var claims = new List<Claim>();
             if (admin != null)
             {
+<<<<<<< HEAD
 
 
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, admin.AdminId.ToString()));
@@ -177,6 +266,23 @@ namespace dotnetapp.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, jobseeker.UserRole));
 
 
+=======
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, admin.AdminId.ToString()));
+                claims.Add(new Claim(ClaimTypes.Email, admin.Email));
+                claims.Add(new Claim(ClaimTypes.Role, admin.UserRole));
+            }
+            else if (user != null)
+            {
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
+                claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                claims.Add(new Claim(ClaimTypes.Role, user.UserRole));
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, jobseeker.JobSeekerId.ToString()));
+                claims.Add(new Claim(ClaimTypes.Email, jobseeker.Email));
+                claims.Add(new Claim(ClaimTypes.Role, jobseeker.UserRole));
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
             }
             var token = new JwtSecurityToken(
                 issuer: "Issuer.in",

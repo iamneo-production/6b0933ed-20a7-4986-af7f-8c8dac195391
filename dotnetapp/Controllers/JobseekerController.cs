@@ -28,6 +28,28 @@ namespace dotnetapp.Controllers
     [HttpGet]
     [Route("getAppliedJobs")]
     public IActionResult GetAppliedJobs([FromQuery] UserRequestModel requestModel){
+<<<<<<< HEAD
+=======
+          try
+    {
+        var appliedJobs = _context.JobJobSeekers
+            .Where(jjs => jjs.JobSeekerId == requestModel.UserId)
+            .Select(jjs => new
+            {
+                jjs.JobId,
+                Job = _context.Jobs.FirstOrDefault(j => j.JobId == jjs.JobId),
+                JobSeeker = _context.JobSeekers.FirstOrDefault(js => js.JobSeekerId == jjs.JobSeekerId),
+                jjs.Status
+            })
+            .ToList();
+
+        return Ok(appliedJobs);
+    }
+    catch (Exception)
+    {
+        return BadRequest(new { Msg = "Error Occurred" });
+    }
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
         try{
         int UserId = requestModel.UserId;
         List<Job> appliedJobs =  _context.Jobs
@@ -35,12 +57,21 @@ namespace dotnetapp.Controllers
                         job => job.JobId,
                         appliedJob => appliedJob.JobId,
                         (job, appliedJob) => new { Job = job, AppliedJob = appliedJob })
+<<<<<<< HEAD
                     .Where(ja => ja.AppliedJob.JobSeekerId == 1)
+=======
+                    .Where(ja => ja.AppliedJob.JobSeekerId == UserId)
+                    .Where(ja => ja.AppliedJob.JobSeekerId == UserId)
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
                     .Select(ja => ja.Job)
                     .ToList();
         if (!appliedJobs.Any()){
             return Ok(UserId);
+<<<<<<< HEAD
             // return NotFound(jobSeekerId);
+=======
+            
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
         }
         else
         {
@@ -58,7 +89,11 @@ namespace dotnetapp.Controllers
         List<Job> jobs = _context.Jobs.ToList();
                 if (!jobs.Any())
                 {
+<<<<<<< HEAD
                     return Conflict(new { Msg = "No Job Found" }); 
+=======
+                    return NotFound(new { Msg = "No Job Found" }); 
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
                 }
                 return Ok(jobs);
         }
@@ -75,6 +110,10 @@ namespace dotnetapp.Controllers
                     var JobJob =new  JobJobSeeker{
                         JobId=id,
                         JobSeekerId=requestModel.UserId,
+<<<<<<< HEAD
+=======
+                        Status="Applied"
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
                     };
                     await _context.JobJobSeekers.AddAsync(JobJob);
                     var existjobseeker=await _context.JobSeekers.FirstOrDefaultAsync(js=>js.JobSeekerId==requestModel.UserId);
@@ -99,6 +138,10 @@ namespace dotnetapp.Controllers
                return BadRequest(new { Msg = "Error Occured" });
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
     [HttpGet]
     [Route("getProfile")]
     public async Task<IActionResult> GetProfile([FromQuery] UserRequestModel requestModel){
@@ -115,6 +158,7 @@ namespace dotnetapp.Controllers
             return BadRequest(new { Msg = "Error Occured" });
         }
     }
+<<<<<<< HEAD
      [HttpGet]
     [Route("checkAlreadyApplied{id}")]
     public IActionResult CheckAlreadyApplied(int id,[FromQuery] UserRequestModel requestModel){
@@ -126,10 +170,47 @@ namespace dotnetapp.Controllers
             else{
                 return Ok("false");
             }
+=======
+  
+    [HttpGet]
+    [Route("checkstatus")]
+    public async Task<IActionResult> CheckStatus([FromQuery] UserRequestModel requestModel){
+        try{
+        List<JobJobSeeker> jobjobs= await _context.JobJobSeekers.Where(jjs=>jjs.JobSeekerId==requestModel.UserId).ToListAsync();
+        if (jobjobs!=null){
+            return Ok(jobjobs);
+        }
+        return BadRequest(new { Msg = "Error Occured" });
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
         }
         catch(Exception){
             return BadRequest(new { Msg = "Error Occured" });
         }
+<<<<<<< HEAD
+=======
+      
+    }
+    [HttpPost]
+    [Route("changestatus")]
+    public async Task<IActionResult> ChangeStatus([FromQuery] UserRequestModel requestModel,[FromBody] JobJobSeeker data){
+        try{
+        var existjobjobs=await _context.JobJobSeekers.FirstOrDefaultAsync(jjs=>jjs.JobId==data.JobId && jjs.JobSeekerId==requestModel.UserId);
+        if (existjobjobs!=null){
+            existjobjobs.Status=data.Status;
+            _context.JobJobSeekers.Update(existjobjobs);
+            await _context.SaveChangesAsync();
+            return Ok(new {msg="Status Changed"});
+        }
+        else{
+            return BadRequest(new { Msg = "Error Occured" });
+        }
+      
+        }
+        catch(Exception){
+             return BadRequest(new { Msg = "Error Occured" });
+        }
+
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
     }
     }
         

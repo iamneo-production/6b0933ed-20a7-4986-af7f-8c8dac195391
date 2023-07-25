@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
@@ -21,3 +22,28 @@ describe('workspace-project App', () => {
     } as logging.Entry));
   });
 });
+=======
+import { AppPage } from './app.po';
+import { browser, logging } from 'protractor';
+
+describe('workspace-project App', () => {
+  let page: AppPage;
+
+  beforeEach(() => {
+    page = new AppPage();
+  });
+
+  it('should display welcome message', () => {
+    page.navigateTo();
+    expect(page.getTitleText()).toEqual('angularapp app is running!');
+  });
+
+  afterEach(async () => {
+    // Assert that there are no errors emitted from the browser
+    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+    expect(logs).not.toContain(jasmine.objectContaining({
+      level: logging.Level.SEVERE,
+    } as logging.Entry));
+  });
+});
+>>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
