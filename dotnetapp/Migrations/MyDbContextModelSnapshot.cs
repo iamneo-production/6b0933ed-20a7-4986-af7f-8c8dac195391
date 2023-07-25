@@ -155,6 +155,9 @@ namespace dotnetapp.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("float");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -169,6 +172,9 @@ namespace dotnetapp.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalRatings")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserRole")
                         .HasColumnType("nvarchar(max)");

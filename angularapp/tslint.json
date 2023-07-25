@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
   "extends": "tslint:recommended",
   "rulesDirectory": [
@@ -152,6 +153,10 @@
   }
 }
 =======
+=======
+
+
+>>>>>>> 919c5631c3b80e9840ba89bb9d0c40b04ba4cebc
 {
   "extends": "tslint:recommended",
   "rulesDirectory": [

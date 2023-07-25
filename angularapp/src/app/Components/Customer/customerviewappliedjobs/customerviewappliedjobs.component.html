@@ -1,1 +1,79 @@
-<p>customerviewappliedjobs works!</p>
+<div class="container-full-page-container" >
+    <div id="parentContainer" class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-6 col-lg-8 col-xl-7" >
+  <div class="container p-2 d-flex justify-content-center " >
+    <div class="col-md-6">
+      <div class="card-header " style="text-align: center; background-color: gainsboro;">
+        Applied Candidates
+      </div>
+    </div>
+  </div>
+  <div class="container p-2 d-flex justify-content-center " >
+  
+    <div class="scroll-container ">
+    <div class="card p-2 w-100" style="outline:none;border: none;">
+    
+      <div  *ngFor="let js of jobs"  class="card mb-3 w-100">
+        <div class="card-body  ">
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Name: </strong>{{js.jobSeeker.jobSeekerName}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Address: </strong>{{js.jobSeeker.address}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Mobile Number: </strong>{{js.jobSeeker.mobileNumber}}</p>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Email: </strong>{{js.jobSeeker.email}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Years of Experience: </strong>{{js.jobSeeker.experience}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text" style="color: red;"><strong>Average Rating: </strong>{{js.jobSeeker.averageRating| number: '1.1-1'}} ({{5}} Ratings)</p>
+              </div>
+              <div *ngIf="js.status === 'Completed'" class="form-group p-2 row align-items-center">
+                <div class="col-sm-7">
+                  <input class="form-control" #ratingInput type="number" min="1" max="5" step="1" placeholder="Your Rating" />
+                </div>
+                <div class="col-sm-4">  
+                  <button class="btn btn-sm btn-primary" [disabled]="ratingInput.value" (click)="addRating(ratingInput.value)">Rate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col d-flex justify-content-between">
+            <div *ngIf="js.status ==='Completed'" class="col p-2 d-flex justify-content-start">
+                <button class="btn btn-sm btn-primary"  (click)="openPaymentReview(js)">Make Payment</button>
+            </div>
+            <div class="col p-2 d-flex justify-content-end">
+              <div class="dd" style=" margin-right: 20px; ">
+                <button class="btn btn-sm " [class.btn-warning]="js.status === 'Applied'" [class.btn-danger]="js.status === 'Completed'" [class.btn-success]="js.status === 'Selected'" [disabled]="js.status==='Completed'|| js.status==='Selected'" (click)="assignjob(js)">{{js.status}}</button>
+              </div>
+              <div class="dd">
+                <button class="btn  btn-sm  btn-primary" (click)="ChatBox(js,js.job.jobId)">Chat</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-3 col-xl-4 offset-xl-1">
+    <div class="chat-container"><app-chat-template *ngIf="showChat" [candidate]="selectedCandidate" (close)="closeChat()" ></app-chat-template></div>
+   
+  </div>
+</div>
+<div class="container">
+  <div class="overlay" *ngIf="showPaymentReview">
+    <app-payment-review [Details]="selectedJob" (cancel)="cancelPayment()"></app-payment-review>
+  </div>
+</div>
+  </div>

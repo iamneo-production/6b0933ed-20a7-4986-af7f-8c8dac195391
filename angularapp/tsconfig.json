@@ -38,6 +38,10 @@
       "es2018",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
+
 }
 >>>>>>> f176ac5fdad4dfb41d8b6e31f46660dac3968e1a
