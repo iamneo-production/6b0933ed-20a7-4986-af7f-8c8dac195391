@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-//import jwtDecode from 'jwt-decode';
+import  jwtDecode  from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthService {
     this.authenticated = true;
     this.token = token;
     const decodedToken: any = jwtDecode(token);
-    this. userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    this.userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
     this.userRole=decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     localStorage.setItem('token', token);
     localStorage.setItem('userRole', this.userRole);

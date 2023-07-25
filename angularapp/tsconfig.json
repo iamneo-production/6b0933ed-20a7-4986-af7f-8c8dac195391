@@ -19,6 +19,9 @@
   },
   "angularCompilerOptions": {
     "strictTemplates": true
-  }
+  },
+    "compilerOptions": {
+      "types": ["jwt-decode"]
 
+}
 }
