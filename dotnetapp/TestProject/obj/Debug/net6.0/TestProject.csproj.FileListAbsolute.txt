@@ -1,6 +1,8 @@
 <<<<<<< HEAD
 =======
+>>>>>>> DotNet_Angular_AE_Carpenter_Hiring_2023-Saran2601
 >>>>>>> 662c039b3c7ea92ea146fee9c1db87fd9fbaf633
+>>>>>>> 82d86b766cce141e3bbc7cab7e9dc26be7eda6cc
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/CoverletSourceRootsMapping
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/dotnetapp.deps.json
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/dotnetapp.runtimeconfig.json
@@ -21,6 +23,7 @@
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/TestProject.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/TestProject.pdb
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Castle.Core.dll
+/home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
 /home/coder/project/workspace/dotnetapp/TestProject/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll

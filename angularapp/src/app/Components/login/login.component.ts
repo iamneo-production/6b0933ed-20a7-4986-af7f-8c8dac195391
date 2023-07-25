@@ -13,6 +13,7 @@ import { AuthService } from 'src/Services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   isLoading: boolean = false;
   form: FormGroup;
   logindata: Loginmodel = new Loginmodel();

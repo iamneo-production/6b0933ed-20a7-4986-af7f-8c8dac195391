@@ -9,6 +9,7 @@ using dotnetapp.Models;
 using System.Net.Http;
 using dotnetapp.Service;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 
 namespace dotnetapp.Controllers
@@ -134,6 +135,7 @@ namespace dotnetapp.Controllers
     [Route("changestatus")]
     public async Task<IActionResult> ChangeStatus([FromQuery] UserRequestModel requestModel,[FromBody] JobJobSeeker data){
         try{
+            if (requestModel.userRole=="Jobseeker"){
         var existjobjobs=await _context.JobJobSeekers.FirstOrDefaultAsync(jjs=>jjs.JobId==data.JobId && jjs.JobSeekerId==requestModel.UserId);
         if (existjobjobs!=null){
             existjobjobs.Status=data.Status;
@@ -144,13 +146,61 @@ namespace dotnetapp.Controllers
         else{
             return BadRequest(new { Msg = "Error Occured" });
         }
-      
+            }
+            else{
+            var existjobjobs=await _context.JobJobSeekers.FirstOrDefaultAsync(jjs=>jjs.JobId==data.JobId && jjs.JobSeekerId==requestModel.UserId);
+            if (existjobjobs!=null){
+            existjobjobs.Status=data.Status;
+            _context.JobJobSeekers.Update(existjobjobs);
+            await _context.SaveChangesAsync();
+            return Ok(new {msg="Status Changed"});
+            }
+             else{
+            return BadRequest(new { Msg = "Error Occured" });
+        }
+            }
         }
         catch(Exception){
              return BadRequest(new { Msg = "Error Occured" });
         }
 
     }
-    }
-        
+
+    [HttpPost]
+    [Route("ratejobseeker{rating}")]
+    public async Task<IActionResult> RateJobSeeker (int rating,[FromQuery] UserRequestModel requestModel){
+         
+          var jobSeeker = _context.JobSeekers.Find(requestModel.UserId);
+          
+
+            if (jobSeeker == null)
+            {
+                return NotFound();
+            }
+
+            if (rating < 1 || rating > 5)
+            {
+                return BadRequest("Invalid rating. Please provide a rating between 1 and 5.");
+            }
+
+            jobSeeker.AverageRating = (jobSeeker.AverageRating * jobSeeker.TotalRatings + rating) / (jobSeeker.TotalRatings + 1);
+            jobSeeker.AverageRating = Math.Min(jobSeeker.AverageRating, 5.0);
+            jobSeeker.TotalRatings += 1;
+
+            try
+            {  
+                _context.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error saving rating: {ex.Message}");
+            }
+             return Ok(jobSeeker);
+
+           
+    
 }
+}
+}
+
