@@ -1,0 +1,38 @@
+<div class="parent-wrapper">
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-success p-2">
+          <a class="navbar-brand" routerLink="/customer">Customer</a>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/customer/dashboard" [ngStyle]="{
+                  'color': '#ffffff',
+                  'font-size': isActive('/customer/dashboard') ? '20px' : '16px',
+                  'transition': 'color 0.3s, font-size 0.3s'
+                }" (mouseover)="linkHovered()" (click)="linkClicked()">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/customer/addJob" [ngStyle]="{
+                  'color': '#ffffff',
+                  'font-size': isActive('/customer/addJob') ? '20px' : '16px',
+                  'transition': 'color 0.3s, font-size 0.3s'
+                }" (mouseover)="linkHovered()" (click)="linkClicked()">Add openings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/customer/viewAppliedCandidates" [ngStyle]="{
+                  'color': '#ffffff',
+                  'font-size': isActive('/customer/viewAppliedCandidates') ? '20px' : '16px',
+                  'transition': 'color 0.3s, font-size 0.3s'
+                }" (mouseover)="linkHovered()" (click)="linkClicked()">Applied Candidates</a>
+              </li>
+            </ul>
+          </div>
+          <div class="navbar-nav ml-auto">
+            <div class="btn btn-sm " (click)="logout()" style="color: white;" >logout</div>
+          </div>
+        </nav>
+      </div>
+      <div class="child-components-wrapper">
+      <router-outlet></router-outlet>
+      </div>
+    </div>  

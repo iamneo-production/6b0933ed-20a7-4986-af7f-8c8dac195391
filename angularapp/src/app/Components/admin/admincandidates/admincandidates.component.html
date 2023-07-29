@@ -1,0 +1,61 @@
+<div class="container full-page-container" >
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-6 col-lg-8 col-xl-7" >
+  <div class="container p-2 d-flex justify-content-center " >
+    <div class="col-md-6">
+      <div class="card-header " style="text-align: center; background-color: gainsboro;">
+        Applied Candidates
+      </div>
+    </div>
+  </div>
+  <div class="container p-2 d-flex justify-content-center " >
+  
+    <div class="scroll-container ">
+    <div class="card p-2 w-100" style="outline:none;border: none;">
+    
+      <div  *ngFor="let js of jobs"  class="card mb-3 w-100">
+        <div class="card-body  ">
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Name: </strong>{{js.jobSeeker.jobSeekerName}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Address: </strong>{{js.jobSeeker.address}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Mobile Number: </strong>{{js.jobSeeker.mobileNumber}}</p>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Email: </strong>{{js.jobSeeker.email}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text"><strong>Years of Experience: </strong>{{js.jobSeeker.experience}}</p>
+              </div>
+              <div class="form-group p-2">
+                <p class="card-text" style="color: red;"><strong>Average Rating: </strong>{{js.jobSeeker.averageRating| number: '1.1-1'}} ({{5}} Ratings)</p>
+              </div>
+            </div>
+          </div>
+          <div class="col d-flex justify-content-between">
+            <div class="col p-2 d-flex justify-content-end">
+              <div class="dd" style=" margin-right: 20px; ">
+                <button class="btn btn-sm btn-primary "  routerLink="/admin/editProfile/:id" (click)="ForEditJob(js)">Edit</button>
+              </div>
+               <div class="dd">
+                <button class="btn  btn-sm  btn-danger" (click)="Delete(js.jobId,js.jobSeekerId)">Delete</button>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-3 col-xl-4 offset-xl-1">
+  </div>
+  </div>
+  </div>
